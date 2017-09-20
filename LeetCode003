@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int i,j;
+        int n=s.length();
+        if(n==0)    return 0;
+        int b=0;
+        queue<char> a;
+        a.push(s[0]);
+        int sum=1;
+        int temp=0;
+        bool re;
+        for(i=1;i<n;i++)
+        {
+            re=true;
+            for(j=b;j<i;j++)
+            {
+                if(s[j]==s[i])  
+                {
+                    b=j+1;
+                    temp=a.size();
+                    sum=sum>temp? sum:temp;
+                    re=false;
+                    while(!a.empty()&&a.front()!=s[j])
+                    {
+                        a.pop();
+                    }
+                    a.pop();
+                    a.push(s[j]);
+                    break;
+               }                
+        }
+            if(re)
+            {
+                a.push(s[i]);
+            }
+        }
+
+        temp=a.size();
+        return (temp>sum? temp:sum);
+}
+};
