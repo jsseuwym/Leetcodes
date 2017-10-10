@@ -1,0 +1,67 @@
+class Solution {
+public:
+    int myAtoi(string str) 
+    {
+        queue<char> signal;
+        queue<int> num;
+        int n;
+        n=str.size();
+        int i=0;
+        num.push(0);
+        int j,k=0;
+        long long int sum=0;
+        while(i<n)
+        {
+            if(str[i]>='0' &&
+              str[i]<='9')
+            {
+                num.push(str[i]-'0');
+            }
+            else
+            {
+                if(signal.size()==0)    
+                {
+                    if(num.size()==1)   signal.push(str[i]);
+                    else break;
+                }
+                else 
+                {
+                    if(signal.front()==' '
+                      && num.size()==1)
+                    {
+                        signal.pop();
+                        signal.push(str[i]);
+                    }
+                    else    break;
+                }
+            }
+            i++;
+        }
+        k=num.size();
+        if(k>11) 
+        {
+            if(signal.front()=='-')     return -2147483648;
+            if(signal.front()=='+'||signal.front()==' '||signal.size()==0)  return 2147483647;
+            else return 0;
+        }
+        for(j=1;j<=k;j++)
+        {
+            sum=sum*10+num.front();
+            num.pop();
+        }
+        if(signal.front()=='-')     
+        {
+            if(sum<2147483648) return -1*sum;
+            else return -2147483648;
+        }
+        else if(signal.front()=='+'
+               ||signal.front()==' '
+               ||signal.size()==0) 
+        {
+            if(sum<=2147483647)   return sum;
+            else        return 2147483647;
+        }
+        else return 0;
+        
+    }
+};
