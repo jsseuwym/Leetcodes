@@ -1,0 +1,23 @@
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        deque<int> a;
+        if(x<0) return false;
+        while(x>=10)
+        {
+            a.push_back(x%10);
+            x=x/10;
+        }
+        a.push_back(x);
+        while(!a.empty())
+        {
+            if(a.front()==a.back())
+            {
+                a.pop_back();
+                if(!a.empty())     a.pop_front();
+            }
+            else    return false;
+        }
+        return true;
+    }
+};
