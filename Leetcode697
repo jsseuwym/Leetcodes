@@ -1,0 +1,49 @@
+class Solution {
+public:
+    int findShortestSubArray(vector<int>& nums) {
+        vector<int> count(50000,0);
+        vector<int> head(50000,-1);
+        vector<int> end(50000,0);
+        int n=nums.size();
+        int i,j;
+        int temp=0;
+        int mi=50000;
+        int mi_temp=1;
+        if(nums[0]==2147483647 || nums[0]==-2147483648)  return 1;
+        for(i=0;i<n;i++)
+        {
+            temp=nums[i];
+            if(temp>=0 && temp<50000)
+            {
+                count[temp]++;
+                if(head[temp]<0)
+                {
+                    head[temp]=i;
+                    end[temp]=i;
+                }
+                else
+                {
+                    end[temp]=i;
+                }
+            }
+        }
+        temp=0;
+        for(i=0;i<50000;i++)
+        {
+            temp=temp<count[i]? count[i]:temp;
+        }
+        if(temp==0)     return 1;
+        for(i=0;i<n;i++)
+        {
+            j=nums[i];
+            if(j>=0 && j<50000)
+            {
+                if(count[j]==temp)
+                {
+                    mi=mi<(end[j]-head[j]+1)? mi:(end[j]-head[j]+1);
+                }
+            }
+        }
+        return mi;
+    }
+};
