@@ -1,0 +1,32 @@
+class Solution {
+public:
+    string intToRoman(int num) {
+        vector<int> nu(4,0);
+        string weishu[4][9]={"M","MM","MMM"," "," "," "," "," "," ",
+                           "C","CC","CCC","CD","D","DC","DCC","DCCC","CM",
+                           "X","XX","XXX","XL","L","LX","LXX","LXXX","XC",
+                           "I","II","III","IV","V","VI","VII","VIII","IX"};
+        //                     {'I','II','III','IV','V','VI','VII','VIII','IX'};
+        // char shiwei[9]={'X','XX','XXX','XL','L','LX','LXX','LXXX','XC'};
+        // char baiwei[9]={'C','CC','CCC','CD','D','DC','DCC','DCCC','CM'};
+        // char qianwei[9]={'M','MM','MMM'};
+        string s1;
+        int i=3;
+        while(num>=10)
+        {
+            nu[i]=num%10;
+            i--;
+            num=num/10;
+        }
+        nu[i]=num;
+        for(i=0;i<4;i++)
+        {
+            if(nu[i]!=0)
+            {
+                s1=s1+weishu[i][nu[i]-1];
+            }
+        }
+        return s1;
+        
+    }
+};
