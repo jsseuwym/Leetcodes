@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int findLength(vector<int>& A, vector<int>& B) {
+        const int r=A.size();
+        const int c=B.size();
+        int ch[r][c];
+        int ma=0;
+        for(int i=0;i<r;i++)
+        {
+            for(int j=0;j<c;j++)
+            {
+                if(A[i]==B[j])
+                {
+                    if(i==0 || j==0)    ch[i][j]=1;
+                     else   
+                     {
+                         ch[i][j]=ch[i-1][j-1]+1;
+                         ma=ma<ch[i][j]? ch[i][j]:ma;
+                     }
+                }
+                else ch[i][j]=0;
+            }
+        }
+        return ma;
+        
+    }
+};
